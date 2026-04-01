@@ -1,0 +1,1170 @@
+/* ============================================================
+   CYLIAN COLIBERT — PORTFOLIO
+   Style : Cyber-Tech sombre | Accent : Cyan #00d4ff / Emeraude #00ffb3
+   Typographie : Syne (display) · Fira Code (mono) · DM Sans (body)
+   ============================================================ */
+
+/* ===================== 1. VARIABLES & RESET ===================== */
+:root {
+  /* Couleurs principales */
+  --bg:           #0d0d0d;
+  --bg-alt:       #111318;
+  --bg-card:      #14181f;
+  --bg-card-hover:#1a2030;
+  --border:       rgba(0, 212, 255, 0.15);
+  --border-hover: rgba(0, 212, 255, 0.45);
+
+  /* Accents */
+  --cyan:         #00d4ff;
+  --emerald:      #00ffb3;
+  --cyan-dim:     rgba(0, 212, 255, 0.08);
+  --emerald-dim:  rgba(0, 255, 179, 0.08);
+
+  /* Textes */
+  --text:         #e2e8f0;
+  --text-muted:   #8892a4;
+  --text-dim:     #4a5568;
+
+  /* Polices */
+  --font-display: 'Syne', sans-serif;
+  --font-body:    'DM Sans', sans-serif;
+  --font-mono:    'Fira Code', monospace;
+
+  /* Espacements */
+  --section-py:   7rem;
+  --container:    1140px;
+  --radius:       12px;
+  --radius-sm:    6px;
+
+  /* Transitions */
+  --ease:         cubic-bezier(0.4, 0, 0.2, 1);
+  --duration:     0.28s;
+}
+
+/* Reset minimaliste */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-weight: 300;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* Sélection texte */
+::selection { background: var(--cyan); color: var(--bg); }
+
+/* ===================== 2. UTILITAIRES ===================== */
+.container {
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.mono { font-family: var(--font-mono); font-size: 0.85em; }
+
+/* Accent coloré (cyan par défaut) */
+.accent { color: var(--cyan); }
+
+/* Label de section (ex : // 01. À propos) */
+.section-label {
+  color: var(--emerald);
+  font-size: 0.78rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 0.6rem;
+}
+
+/* Titre principal de section */
+.section-title {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4vw, 2.8rem);
+  font-weight: 800;
+  line-height: 1.1;
+  margin-bottom: 3.5rem;
+  color: #fff;
+}
+
+/* Pastilles badge génériques */
+.tag {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  background: var(--cyan-dim);
+  font-family: var(--font-mono);
+  transition: color var(--duration), border-color var(--duration);
+}
+.tag:hover { color: var(--cyan); border-color: var(--cyan); }
+
+/* ===================== 3. BARRE DE NAVIGATION ===================== */
+#navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  padding: 1.25rem 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: background var(--duration) var(--ease),
+              padding var(--duration) var(--ease),
+              box-shadow var(--duration) var(--ease);
+}
+
+/* Fond visible dès que l'utilisateur scrolle */
+#navbar.scrolled {
+  background: rgba(13, 13, 13, 0.92);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  padding: 0.85rem 2.5rem;
+  box-shadow: 0 1px 0 var(--border), 0 8px 32px rgba(0,0,0,0.4);
+}
+
+/* Logo type */
+.nav-logo .mono {
+  font-size: 1.1rem;
+  color: var(--cyan);
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-decoration: none;
+}
+
+/* Liens de navigation */
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+}
+
+.nav-links a {
+  color: var(--text-muted);
+  text-decoration: none;
+  font-size: 0.88rem;
+  font-weight: 400;
+  letter-spacing: 0.03em;
+  position: relative;
+  transition: color var(--duration);
+}
+
+/* Soulignement animé */
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: -3px;
+  left: 0;
+  width: 0;
+  height: 1.5px;
+  background: var(--cyan);
+  transition: width var(--duration) var(--ease);
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+  color: #fff;
+}
+
+.nav-links a:hover::after,
+.nav-links a.active::after {
+  width: 100%;
+}
+
+/* Bouton CTA navigation */
+.nav-cta {
+  padding: 0.4rem 1.1rem !important;
+  border: 1px solid var(--cyan) !important;
+  border-radius: 6px !important;
+  color: var(--cyan) !important;
+  transition: background var(--duration), color var(--duration) !important;
+}
+.nav-cta:hover {
+  background: var(--cyan) !important;
+  color: var(--bg) !important;
+}
+.nav-cta::after { display: none !important; }
+
+/* Hamburger mobile */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+}
+.hamburger span {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background: var(--text);
+  border-radius: 2px;
+  transition: transform 0.3s, opacity 0.3s;
+}
+.hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.hamburger.open span:nth-child(2) { opacity: 0; }
+.hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+/* Menu mobile overlay */
+.mobile-menu {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(13, 13, 13, 0.97);
+  z-index: 999;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s;
+}
+.mobile-menu.open {
+  opacity: 1;
+  pointer-events: all;
+}
+.mobile-menu ul {
+  list-style: none;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+.mobile-menu a {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  font-weight: 800;
+  color: #fff;
+  text-decoration: none;
+  transition: color var(--duration);
+}
+.mobile-menu a:hover { color: var(--cyan); }
+
+/* ===================== 4. HEADER ===================== */
+#hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  padding: 7rem 2rem 5rem;
+}
+
+/* Grille d'arrière-plan en pointillé */
+.hero-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(var(--border) 1px, transparent 1px),
+    linear-gradient(90deg, var(--border) 1px, transparent 1px);
+  background-size: 60px 60px;
+  mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 30%, transparent 100%);
+  -webkit-mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 30%, transparent 100%);
+  animation: gridPulse 8s ease-in-out infinite;
+}
+
+@keyframes gridPulse {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 0.9; }
+}
+
+/* Lueurs ambiantes */
+.glow {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  pointer-events: none;
+}
+.glow-1 {
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(0,212,255,0.12) 0%, transparent 70%);
+  top: -10%;
+  right: -10%;
+  animation: float1 12s ease-in-out infinite;
+}
+.glow-2 {
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(0,255,179,0.08) 0%, transparent 70%);
+  bottom: 5%;
+  left: -5%;
+  animation: float2 15s ease-in-out infinite;
+}
+@keyframes float1 {
+  0%, 100% { transform: translate(0,0) scale(1); }
+  50% { transform: translate(-30px, 20px) scale(1.1); }
+}
+@keyframes float2 {
+  0%, 100% { transform: translate(0,0) scale(1); }
+  50% { transform: translate(20px, -15px) scale(1.08); }
+}
+
+/* Contenu du hero */
+.hero-content {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  max-width: 760px;
+}
+
+.hero-tag {
+  color: var(--emerald);
+  font-size: 0.78rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  margin-bottom: 1.5rem;
+  opacity: 0;
+  animation: fadeUp 0.7s var(--ease) 0.2s forwards;
+}
+
+.hero-name {
+  font-family: var(--font-display);
+  font-size: clamp(3.5rem, 9vw, 7rem);
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: #fff;
+  margin-bottom: 1.25rem;
+  opacity: 0;
+  animation: fadeUp 0.7s var(--ease) 0.35s forwards;
+}
+
+.hero-name .accent {
+  /* Dégradé sur le mot "Colibert" */
+  background: linear-gradient(135deg, var(--cyan) 0%, var(--emerald) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.hero-subtitle {
+  font-size: clamp(1rem, 2.5vw, 1.2rem);
+  color: var(--text-muted);
+  font-weight: 300;
+  line-height: 1.6;
+  margin-bottom: 2.5rem;
+  opacity: 0;
+  animation: fadeUp 0.7s var(--ease) 0.5s forwards;
+}
+.hero-subtitle .accent { -webkit-text-fill-color: unset; background: none; }
+
+/* Boutons du hero */
+.hero-links {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 3.5rem;
+  opacity: 0;
+  animation: fadeUp 0.7s var(--ease) 0.65s forwards;
+}
+
+.hero-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.7rem 1.6rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.9rem;
+  font-weight: 500;
+  text-decoration: none;
+  transition: transform var(--duration), box-shadow var(--duration), background var(--duration);
+  background: var(--cyan);
+  color: var(--bg);
+  border: 1px solid var(--cyan);
+}
+.hero-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 24px rgba(0,212,255,0.4);
+}
+
+.hero-btn--outline {
+  background: transparent;
+  color: var(--text);
+}
+.hero-btn--outline:hover {
+  background: rgba(255,255,255,0.06);
+  box-shadow: 0 0 16px rgba(255,255,255,0.08);
+}
+
+/* Scroll indicator */
+.scroll-indicator {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  text-decoration: none;
+  color: var(--text-dim);
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  transition: color var(--duration);
+  opacity: 0;
+  animation: fadeUp 0.7s var(--ease) 0.9s forwards;
+}
+.scroll-indicator:hover { color: var(--cyan); }
+
+/* Petite animation de la bille dans le scroll indicator */
+.scroll-dot {
+  animation: scrollBounce 2s ease-in-out infinite;
+}
+@keyframes scrollBounce {
+  0%, 100% { cy: 7; }
+  50% { cy: 14; }
+}
+
+/* ===================== 5. SECTIONS GÉNÉRALES ===================== */
+section {
+  padding: var(--section-py) 0;
+  position: relative;
+}
+
+/* Alternance de fond légèrement différente */
+section:nth-child(even) {
+  background: var(--bg-alt);
+}
+
+/* Ligne décorative en haut de chaque section */
+section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 1px;
+  height: 60px;
+  background: linear-gradient(to bottom, var(--border-hover), transparent);
+}
+
+/* ===================== 6. À PROPOS ===================== */
+.about-grid {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  gap: 4rem;
+  align-items: start;
+}
+
+/* Encadrement photo */
+.about-photo-wrap { display: flex; flex-direction: column; gap: 1.5rem; }
+
+.about-photo-frame {
+  position: relative;
+  width: 200px;
+  height: 200px;
+}
+/* Bordure glowing */
+.about-photo-frame::before {
+  content: '';
+  position: absolute;
+  inset: -3px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--cyan), var(--emerald));
+  z-index: -1;
+}
+
+/* Placeholder si pas de vraie photo */
+.about-photo-placeholder {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  background: var(--bg-card);
+  border: 3px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: var(--cyan);
+  letter-spacing: 0.05em;
+}
+
+/* Stats rapides */
+.about-stats {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+.stat {
+  display: flex;
+  align-items: baseline;
+  gap: 0.6rem;
+  padding: 0.6rem 1rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+}
+.stat-num {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 800;
+}
+.stat-label { font-size: 0.8rem; color: var(--text-muted); }
+
+/* Texte du profil */
+.about-text p {
+  color: var(--text-muted);
+  margin-bottom: 1.1rem;
+  font-size: 1rem;
+}
+.about-text strong { color: var(--text); font-weight: 500; }
+
+.about-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1.5rem;
+}
+
+/* ===================== 7. TIMELINE (Expériences) ===================== */
+.timeline {
+  position: relative;
+  padding-left: 2rem;
+}
+
+/* Ligne verticale centrale */
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 12px;
+  bottom: 0;
+  width: 1px;
+  background: linear-gradient(to bottom, var(--cyan), var(--emerald), transparent);
+}
+
+/* Item de la timeline */
+.timeline-item {
+  position: relative;
+  margin-bottom: 3rem;
+  padding-left: 2.5rem;
+}
+
+/* Marqueur (point) */
+.timeline-marker {
+  position: absolute;
+  left: -2.5rem;
+  top: 8px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--cyan);
+  border: 3px solid var(--bg);
+  box-shadow: 0 0 12px var(--cyan);
+  transition: transform var(--duration);
+}
+.timeline-item:hover .timeline-marker { transform: scale(1.3); }
+
+/* Marqueur mineur (bénévolat) */
+.timeline-marker--minor {
+  background: var(--text-dim);
+  box-shadow: none;
+  width: 10px;
+  height: 10px;
+  top: 10px;
+  left: calc(-2.5rem + 2px);
+}
+
+/* Contenu de l'item */
+.timeline-content {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.75rem;
+  transition: border-color var(--duration), box-shadow var(--duration), transform var(--duration);
+}
+.timeline-item:hover .timeline-content {
+  border-color: var(--border-hover);
+  box-shadow: 0 4px 32px rgba(0,212,255,0.08);
+  transform: translateX(4px);
+}
+
+.timeline-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 0.4rem;
+}
+.tl-company {
+  font-family: var(--font-display);
+  font-size: 0.9rem;
+  font-weight: 800;
+  color: var(--cyan);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.tl-date { color: var(--text-dim); font-size: 0.78rem; }
+
+.tl-title {
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: #fff;
+  margin-bottom: 0.2rem;
+}
+.tl-location { color: var(--text-dim); font-size: 0.78rem; margin-bottom: 1rem; }
+
+/* Liste à puces dans la timeline */
+.tl-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+.tl-list li {
+  color: var(--text-muted);
+  font-size: 0.93rem;
+  padding-left: 0.5rem;
+  border-left: 2px solid var(--border);
+  padding-top: 0.2rem;
+  padding-bottom: 0.2rem;
+  transition: border-color var(--duration);
+}
+.tl-list li:hover { border-left-color: var(--emerald); }
+.tl-list strong { color: var(--text); font-weight: 500; }
+
+/* Badge de technologie dans la timeline */
+.tl-tag {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  padding: 0.1rem 0.5rem;
+  border-radius: 4px;
+  background: var(--emerald-dim);
+  color: var(--emerald);
+  border: 1px solid rgba(0,255,179,0.2);
+  margin-right: 0.5rem;
+  white-space: nowrap;
+}
+
+/* Item mineur de timeline */
+.timeline-item--minor .timeline-content {
+  opacity: 0.7;
+  transition: opacity var(--duration);
+}
+.timeline-item--minor:hover .timeline-content { opacity: 1; }
+
+/* ===================== 8. PROJETS (Cards) ===================== -->
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+  gap: 1.5rem;
+}
+
+/* Carte de projet */
+.project-card {
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--bg-card);
+  position: relative;
+  overflow: hidden;
+  cursor: default;
+  transition: border-color var(--duration), box-shadow var(--duration), transform var(--duration);
+}
+
+/* Effet de lueur en hover */
+.project-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(105deg, transparent, rgba(0,212,255,0.06), transparent);
+  transition: left 0.5s var(--ease);
+  pointer-events: none;
+}
+.project-card:hover::before { left: 140%; }
+
+.project-card:hover {
+  border-color: var(--border-hover);
+  box-shadow: 0 8px 40px rgba(0,212,255,0.12);
+  transform: translateY(-5px);
+}
+
+.project-card-inner {
+  padding: 1.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  height: 100%;
+}
+
+.project-icon { font-size: 2rem; line-height: 1; }
+
+.project-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+.project-date { color: var(--text-dim); font-size: 0.72rem; }
+.project-tag {
+  font-size: 0.7rem;
+  padding: 0.15rem 0.55rem;
+  border-radius: 999px;
+  background: var(--cyan-dim);
+  color: var(--cyan);
+  border: 1px solid rgba(0,212,255,0.2);
+  font-family: var(--font-mono);
+}
+
+.project-title {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: #fff;
+  line-height: 1.2;
+}
+.project-sub { color: var(--emerald); font-size: 0.83rem; margin-bottom: 0.25rem; }
+
+.project-desc {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  line-height: 1.65;
+  flex: 1;
+}
+.project-desc strong { color: var(--text); font-weight: 500; }
+
+/* Badges de technos en bas de carte */
+.project-badges {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-top: 0.75rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--border);
+}
+.project-badges li {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  padding: 0.2rem 0.6rem;
+  border-radius: 4px;
+  background: var(--bg-alt);
+  color: var(--text-muted);
+  border: 1px solid var(--border);
+  transition: color var(--duration), border-color var(--duration);
+}
+.project-badges li:hover { color: var(--cyan); border-color: rgba(0,212,255,0.35); }
+
+/* ===================== 9. COMPÉTENCES ===================== */
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 3rem;
+}
+
+/* Groupe de compétences */
+.skill-group {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  transition: border-color var(--duration);
+}
+.skill-group:hover { border-color: var(--border-hover); }
+
+.skill-group-title {
+  font-family: var(--font-display);
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--cyan);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.skill-icon { font-family: var(--font-mono); font-size: 0.85rem; }
+
+/* Badges de compétences */
+.skill-badges { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+
+.badge {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.73rem;
+  padding: 0.3rem 0.75rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid;
+  transition: transform var(--duration), box-shadow var(--duration);
+}
+.badge:hover { transform: translateY(-2px); }
+
+/* Couleurs par catégorie */
+.badge--lang      { background: rgba(0,212,255,0.07);   border-color: rgba(0,212,255,0.25);  color: var(--cyan); }
+.badge--framework { background: rgba(0,255,179,0.07);   border-color: rgba(0,255,179,0.25);  color: var(--emerald); }
+.badge--tool      { background: rgba(148,163,184,0.06); border-color: rgba(148,163,184,0.2); color: #94a3b8; }
+.badge--soft      { background: rgba(251,191,36,0.06);  border-color: rgba(251,191,36,0.2);  color: #fbbf24; }
+
+.badge--lang:hover      { box-shadow: 0 0 12px rgba(0,212,255,0.3); }
+.badge--framework:hover { box-shadow: 0 0 12px rgba(0,255,179,0.3); }
+.badge--tool:hover      { box-shadow: 0 0 12px rgba(148,163,184,0.2); }
+.badge--soft:hover      { box-shadow: 0 0 12px rgba(251,191,36,0.2); }
+
+/* Barres de langues */
+.lang-section { max-width: 540px; }
+.lang-bars { display: flex; flex-direction: column; gap: 1.25rem; margin-top: 1rem; }
+.lang-item { display: grid; grid-template-columns: 120px 1fr 50px; align-items: center; gap: 1rem; }
+.lang-name { font-size: 0.88rem; color: var(--text); }
+
+.lang-bar-track {
+  height: 4px;
+  background: var(--border);
+  border-radius: 999px;
+  overflow: hidden;
+}
+.lang-bar-fill {
+  height: 100%;
+  width: var(--w);
+  background: linear-gradient(90deg, var(--cyan), var(--emerald));
+  border-radius: 999px;
+  animation: barGrow 1.2s var(--ease) forwards;
+  transform-origin: left;
+}
+@keyframes barGrow {
+  from { transform: scaleX(0); }
+  to   { transform: scaleX(1); }
+}
+
+.lang-level { font-size: 0.75rem; color: var(--text-dim); text-align: right; }
+
+/* ===================== 10. FORMATION ===================== */
+.formation-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 1.5rem;
+}
+
+/* Carte de formation */
+.formation-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 2rem;
+  display: flex;
+  gap: 1.5rem;
+  align-items: flex-start;
+  transition: border-color var(--duration), transform var(--duration);
+}
+.formation-card:hover {
+  border-color: var(--border-hover);
+  transform: translateY(-3px);
+}
+
+.formation-year {
+  font-size: 0.72rem;
+  color: var(--emerald);
+  white-space: nowrap;
+  padding-top: 0.2rem;
+  letter-spacing: 0.05em;
+}
+
+.formation-diploma {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--cyan);
+  border: 1px solid rgba(0,212,255,0.25);
+  border-radius: 4px;
+  padding: 0.15rem 0.5rem;
+  margin-bottom: 0.6rem;
+  background: var(--cyan-dim);
+}
+.formation-school {
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 0.6rem;
+}
+.formation-body p {
+  color: var(--text-muted);
+  font-size: 0.88rem;
+  line-height: 1.6;
+}
+.formation-body strong { color: var(--text); font-weight: 500; }
+
+/* ===================== 11. CONTACT ===================== */
+#contact {
+  background: var(--bg) !important; /* override alternance */
+}
+#contact .section-title { margin-bottom: 1rem; }
+
+.contact-intro {
+  color: var(--text-muted);
+  font-size: 1.05rem;
+  margin-bottom: 3rem;
+  max-width: 520px;
+}
+
+.contact-links {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  max-width: 480px;
+}
+
+.contact-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.1rem 1.4rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  color: var(--text-muted);
+  text-decoration: none;
+  font-size: 0.93rem;
+  transition: border-color var(--duration), color var(--duration),
+              box-shadow var(--duration), transform var(--duration);
+}
+.contact-item:hover {
+  border-color: var(--cyan);
+  color: var(--cyan);
+  box-shadow: 0 4px 24px rgba(0,212,255,0.1);
+  transform: translateX(6px);
+}
+.contact-item svg { flex-shrink: 0; color: var(--cyan); }
+
+/* ===================== 12. FOOTER ===================== */
+footer {
+  padding: 2.5rem 0;
+  border-top: 1px solid var(--border);
+  background: var(--bg);
+}
+
+.footer-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.footer-logo { color: var(--cyan); font-size: 1rem; font-weight: 600; }
+.footer-copy { color: var(--text-dim); font-size: 0.8rem; }
+.footer-made { color: var(--text-dim); font-size: 0.75rem; }
+
+/* ===================== 13. ANIMATIONS GLOBALES ===================== */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Apparition au scroll via JS (si ajouté) — ou via CSS animation-timeline */
+/* Pour l'instant, les sections apparaissent simplement en flow */
+
+/* ===================== 14. RESPONSIVE ===================== */
+
+/* Tablette */
+@media (max-width: 900px) {
+  :root { --section-py: 5rem; }
+
+  /* À propos : passage en colonne */
+  .about-grid {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+  .about-photo-wrap {
+    flex-direction: row;
+    align-items: center;
+    gap: 2rem;
+  }
+  .about-photo-frame, .about-photo-placeholder { width: 120px; height: 120px; }
+
+  /* Stats horizontales */
+  .about-stats { flex-direction: row; flex-wrap: wrap; }
+
+  /* Timeline */
+  .timeline { padding-left: 1.25rem; }
+  .timeline-item { padding-left: 1.75rem; }
+  .timeline-marker { left: -1.75rem; }
+  .timeline-marker--minor { left: calc(-1.75rem + 2px); }
+}
+
+/* Mobile */
+@media (max-width: 640px) {
+  :root { --section-py: 4rem; }
+
+  /* Navigation : masquer les liens, montrer hamburger */
+  .nav-links { display: none; }
+  .hamburger { display: flex; }
+  .mobile-menu { display: flex; }
+
+  /* Hero */
+  .hero-name { letter-spacing: -0.01em; }
+  .hero-links { flex-direction: column; align-items: center; }
+
+  /* Sections */
+  .container { padding: 0 1.25rem; }
+
+  /* À propos */
+  .about-photo-wrap { flex-direction: column; }
+
+  /* Projets : une colonne */
+  .projects-grid { grid-template-columns: 1fr; }
+
+  /* Compétences */
+  .skills-grid { grid-template-columns: 1fr; }
+
+  /* Formation */
+  .formation-grid { grid-template-columns: 1fr; }
+  .formation-card { flex-direction: column; gap: 0.75rem; }
+
+  /* Footer */
+  .footer-inner { flex-direction: column; text-align: center; }
+
+  /* Timeline header */
+  .timeline-header { flex-direction: column; align-items: flex-start; }
+
+  /* Lang bars */
+  .lang-item { grid-template-columns: 90px 1fr 40px; }
+}
+
+/* ===================== 15. SCROLLBAR CUSTOM ===================== */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(to bottom, var(--cyan), var(--emerald));
+  border-radius: 999px;
+}
+
+/* ===================== 16. ANIMATIONS JS — classes et styles associés ===================== */
+
+/* --- Curseur personnalisé --- */
+body.custom-cursor,
+body.custom-cursor * { cursor: none !important; }
+
+.cursor-dot {
+  position: fixed;
+  top: -5px;
+  left: -5px;
+  width: 10px;
+  height: 10px;
+  background: var(--cyan);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 99999;
+  mix-blend-mode: difference;
+  will-change: transform;
+}
+
+.cursor-ring {
+  position: fixed;
+  top: -18px;
+  left: -18px;
+  width: 36px;
+  height: 36px;
+  border: 1.5px solid rgba(0, 212, 255, 0.6);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 99998;
+  will-change: transform;
+  transition: width 0.2s, height 0.2s, top 0.2s, left 0.2s, border-color 0.2s;
+}
+
+/* Agrandissement au survol d'un élément interactif */
+.cursor-ring--hover {
+  top: -28px;
+  left: -28px;
+  width: 56px;
+  height: 56px;
+  border-color: var(--emerald);
+}
+
+/* --- Curseur clignotant typewriter --- */
+.typewriter-cursor {
+  display: inline-block;
+  color: var(--cyan);
+  font-weight: 300;
+  margin-left: 2px;
+  animation: blink 0.8s step-end infinite;
+}
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0; }
+}
+
+/* --- Révélation au scroll (.reveal / .reveal--visible) --- */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.65s var(--ease), transform 0.65s var(--ease);
+}
+.reveal--visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Variante : les items de timeline arrivent par la gauche */
+.timeline-item.reveal {
+  transform: translateX(-20px) translateY(10px);
+}
+.timeline-item.reveal--visible {
+  transform: translateX(0) translateY(0);
+}
+
+/* --- Section title : pas de reveal (scramble JS) mais entrée subtile --- */
+.section-title {
+  will-change: contents;
+}
+
+/* ============================================================ CLASSES INJECTÉES PAR animations.js ============================================================ */
+
+/* --- Effet Ripple (clic sur boutons) --- */
+.ripple {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(0, 212, 255, 0.25);
+  pointer-events: none;
+  transform: scale(0);
+  animation: rippleAnim 0.6s var(--ease) forwards;
+}
+@keyframes rippleAnim {
+  to { transform: scale(1); opacity: 0; }
+}
+
+/* --- Barre de progression de lecture (haut de page) --- */
+.read-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 2px;
+  width: 0%;
+  background: linear-gradient(90deg, var(--cyan), var(--emerald));
+  z-index: 9999;
+  transition: width 0.05s linear;
+  box-shadow: 0 0 8px rgba(0, 212, 255, 0.5);
+}
+
+/* --- Canvas particules hero --- */
+.hero-particles {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* --- Transition douce de la transition reveal avec délai personnalisé --- */
+.reveal {
+  transition-delay: var(--reveal-delay, 0ms);
+}
